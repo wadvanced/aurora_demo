@@ -40,6 +40,7 @@ defmodule AuroraDemo.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:aurora, "~> 0.1", repo: "local"},
       {:phoenix, "~> 1.8.0"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.13"},
