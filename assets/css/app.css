@@ -5,6 +5,7 @@
 @source "../css";
 @source "../js";
 @source "../../lib/aurora_demo_web";
+@source "../../deps/aurora_uix/lib";
 
 /* A Tailwind plugin that makes "hero-#{ICON}" classes available.
    The heroicons installation itself is managed by your mix.exs */
@@ -103,3 +104,4 @@
 [data-phx-session], [data-phx-teleported-src] { display: contents }
 
 /* This file is for your main application CSS */
+@import "../css/auix-stylesheet.css"
