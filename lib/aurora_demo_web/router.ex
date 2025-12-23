@@ -16,12 +16,6 @@ defmodule AuroraDemoWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", AuroraDemoWeb do
-    pipe_through :browser
-
-    get "/", PageController, :home
-  end
-
   scope "/demo", AuroraDemoWeb.ContactInfo do
     pipe_through :browser
 
