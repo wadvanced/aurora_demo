@@ -40,18 +40,11 @@ defmodule AuroraDemo.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:aurora, "~> 0.1", repo: "local"},
-      {:phoenix, "~> 1.8.0"},
-      {:phoenix_ecto, "~> 4.5"},
-      {:ecto_sql, "~> 3.13"},
-      {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 4.1"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 1.1.0"},
-      {:lazy_html, ">= 0.1.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.8.3"},
+      {:aurora_ctx, "~> 0.1"},
+      {:aurora_uix, "~> 0.1"},
+      {:ex_cldr_territories, "~> 2.10"},
+      {:dns_cluster, "~> 0.2.0"},
       {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.2.0",
@@ -59,14 +52,16 @@ defmodule AuroraDemo.MixProject do
        app: false,
        compile: false,
        depth: 1},
-      {:swoosh, "~> 1.16"},
+      {:jason, "~> 1.2"},
+      {:lazy_html, ">= 0.1.0", only: :test},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.8.3"},
       {:req, "~> 0.5"},
+      {:swoosh, "~> 1.16"},
+      {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.26"},
-      {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:typed_ecto_schema, "~> 0.4", runtime: false}
     ]
   end
 
@@ -83,8 +78,9 @@ defmodule AuroraDemo.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind aurora_demo", "esbuild aurora_demo"],
+      "assets.build": ["auix.gen.stylesheet", "tailwind aurora_demo", "esbuild aurora_demo"],
       "assets.deploy": [
+        "auix.gen.stylesheet",
         "tailwind aurora_demo --minify",
         "esbuild aurora_demo --minify",
         "phx.digest"
