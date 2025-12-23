@@ -18,6 +18,8 @@ defmodule AuroraDemo.Application do
       AuroraDemoWeb.Endpoint
     ]
 
+    {:ok, _} = Application.ensure_all_started(:aurora_uix)
+
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: AuroraDemo.Supervisor]
