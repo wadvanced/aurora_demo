@@ -13,7 +13,7 @@ config :aurora_demo,
 
 # Configures the endpoint
 config :aurora_demo, AuroraDemoWeb.Endpoint,
-  url: [host: "localhost"],
+  http: [ip: {0, 0, 0, 0}, port: String.to_integer(System.get_env("PORT") || "4000")],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: AuroraDemoWeb.ErrorHTML, json: AuroraDemoWeb.ErrorJSON],
@@ -48,6 +48,9 @@ config :tailwind,
     args: ~w(
       --input=assets/css/app.css
       --output=priv/static/assets/css/app.css
+      --content=./lib/**/*.{ex,heex,eex}
+      --content=./assets/js/**/*.js
+      --content=./deps/aurora_uix/lib/**/*.{ex,heex,eex}
     ),
     cd: Path.expand("..", __DIR__)
   ]

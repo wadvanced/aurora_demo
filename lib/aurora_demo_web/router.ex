@@ -1,6 +1,8 @@
 defmodule AuroraDemoWeb.Router do
   use AuroraDemoWeb, :router
 
+  import Aurora.Uix.RouteHelper
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -18,6 +20,12 @@ defmodule AuroraDemoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  scope "/demo", AuroraDemoWeb.ContactInfo do
+    pipe_through :browser
+
+    auix_live_resources("/contact_info/addresses", Address)
   end
 
   # Other scopes may use custom stacks.
